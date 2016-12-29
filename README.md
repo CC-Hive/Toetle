@@ -11,6 +11,9 @@ A normal stub function would return nil which is not something that most turtle 
 
 This does *not* simulate a full turtle.
 
+# Why make this?
+Because HowlCI doesn't have a turtle API and Hive probably will need one.
+
 # TODO and Notes Regarding Imlementation
 * All toetle specific stuff should be in turtle.toetle where both turtle and toetle are tables. Other than the toetle subtable the turtle table should have the same keys/indexes as the vanilla turtle API.
 * Functions in the turtle API returns an entry from their responce list.
