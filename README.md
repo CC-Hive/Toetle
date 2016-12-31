@@ -25,6 +25,6 @@ Because HowlCI doesn't have a turtle API and Hive probably will need one.
  * what to do if no list was given? error seems best, if programmer wants nil then say so.
 * Regarding functions to add responces:
  * Naming convetion. Same as turtle API but in toetle table?
- * allow adding a table of responces?
+ * allow adding a table of responces? no, toetle is nieve, it will return whatever you give it. If you want to add multiple responces then either manipulate the list directly or feed the responces one at a time to the input function (recommended)
 * Interactive mode? Ask programmer for responce each time.
  * specific functions only? IE can have only one or two functions query for input, rest can use lists.

@@ -11,10 +11,12 @@ local lists = toetle.lists
 local indexes = toetle.indexes
 
 -- add turtle functions
--- TODO
+-- TODO - template mostly done
 -- http://computercraft.info/wiki/Turtle_(API)
 
 function turtle.TEMPLATE()
+  -- TODO: Interactive mode
+  -- TODO: Random mode
   if (not lists.TEMPLATE) or (not indexes.TEMPLATE) then
     error("No responces for this function.",2)
   else
@@ -32,7 +34,7 @@ end
 -- TODO
 
 function toetle.TEMPLATE(...)
-  args = {...}
+  local args = {...}
   if not indexes.TEMPLATE then
     indexes.TEMPLATE = 1
   end
@@ -42,8 +44,10 @@ function toetle.TEMPLATE(...)
   if not args[1] then
     -- user wants nil
     lists.TEMPLATE[indexes.TEMPLATE] = {}
+  else
+    -- user has given data which needs to be added to the list of responces
+    lists.TEMPLATE[indexes.TEMPLATE] = args
   end
-    
 end
 
 
