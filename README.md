@@ -28,3 +28,4 @@ Because HowlCI doesn't have a turtle API and Hive probably will need one.
  * allow adding a table of responces? no, toetle is nieve, it will return whatever you give it. If you want to add multiple responces then either manipulate the list directly or feed the responces one at a time to the input function (recommended)
 * Interactive mode? Ask programmer for responce each time.
  * specific functions only? IE can have only one or two functions query for input, rest can use lists.
+* document handler faunctions
