@@ -1,6 +1,7 @@
 if turtle then return end -- we're not needed so we'll just exit
 
-turtle = {} -- create dummy API
+_G.turtle = {} -- create dummy API
+local turtle = _G.turtle
 turtle.toetle = {} -- insert our subAPI which will make the other one work
 turtle.toetle.lists = {} -- where we store our responces
 turtle.toetle.indexes = {}
