@@ -107,7 +107,7 @@ setmetatable(turtle.toetle, toetleMeta)
 function turtleMeta.__newindex(t,k,v)
   error("Toetle: this functon is not initualised")
 end
-function turtleMeta.__index(t,k) -- when users call a turtle function it this is what actually happens
+function turtleMeta.__index(t,k,...) -- when users call a turtle function it this is what actually happens
   if (not states.k) then
     error("Toetle: This function has no handler and probably has not been initualised.",2)
   else
