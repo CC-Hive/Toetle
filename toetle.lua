@@ -82,11 +82,11 @@ function loopHandler()
   if lists.TEMPLATE[indexes.TEMPLATE] == nil then
     indexes.TEMPLATE = 1
   end
-  return r
+  return unpack(r)
 end
 function randomHandler()
   -- return a random responce from the list
-  return list.TEMPLATE[math.random(#list.TEMPLATE)]
+  return unpack(list.TEMPLATE[math.random(#list.TEMPLATE)])
 end
 function interactiveHandler()
   -- prompt user for input
@@ -104,47 +104,44 @@ local turtleMeta = {}
 local toetleMeta = {}
 setmetatable(turtle, turtleMeta)
 setmetatable(turtle.toetle, toetleMeta)
-function turtleMeta.__newindex(t,k,v)
-  error("Toetle: this functon is not initualised")
-end
-function turtleMeta.__index(t,k,...) -- when users call a turtle function it this is what actually happens
+function turtleMeta.__index(t,k,...) -- when users call a turtle function we'll need to find it, arguments are then passed 'magically'
   if (not states.k) then
-    error("Toetle: This function has no handler and probably has not been initualised.",2)
+    error("Toetle: this functon is not initualised")
   else
     if type(states.k) ~= "function" then
       error("Toetle: state must be a function",2)
+    else
+      return state.k -- found the function
     end
-    r = state.k(...)
-    if type(r) ~= "table" then
-      error("Toetle: handler functions must return a table",2)
-    end
-    return unpack(r)
   end
+  error("Toetle: this thing that should never happen in turtleMeta.__index has happened.") -- this should never happen, but if it does...
 end
 
 
-function toetleMeta.__index(t,k,...) -- initualise turtle functions
-  -- look up in known turtle functions
-  local args = {...}
-  if not knownTurtleFunctions[k] then
-    error("Toetle: not a known turtle function, check your spelling. If it's a new function then you can add it to the list (turtle.toetle.knownTurtleFunctions."..k.." = true) and Toetle will do the rest.",2)
-  else
-    if not states.k then
-    states.k = nativeStates.loop
-  end
-  if not indexes.k then
-    indexes.k = 1
-  end
-  if not lists.k then
-    lists.k = {}
-  end
-  if not args[1] then
-    -- user wants nil
-    lists.k[indexes.k] = {}
-  else
-    -- user has given data which needs to be added to the list of responces
-    lists.k[indexes.k] = args
-  end
+function toetleMeta.__index(t,k) -- initualise turtle functions
+  return function(...)
+    -- look up in known turtle functions
+    local args = {...}
+    if not knownTurtleFunctions[k] then
+      error("Toetle: not a known turtle function, check your spelling. If it's a new function then you can add it to the list (turtle.toetle.knownTurtleFunctions."..k.." = true) and Toetle will do the rest.",2)
+    else
+      if not states.k then
+      states.k = nativeStates.loop
+      end
+      if not indexes.k then
+        indexes.k = 1
+      end
+      if not lists.k then
+        lists.k = {}
+      end
+      if not args[1] then
+        -- user wants nil
+        lists.k[indexes.k] = {}
+      else
+        -- user has given data which needs to be added to the list of responces
+        lists.k[indexes.k] = args
+      end
+    end
   end
 end
 
