@@ -15,6 +15,7 @@ This does *not* simulate a full turtle.
 Because HowlCI doesn't have a turtle API and Hive probably will need one.
 
 # TODO and Notes Regarding Implementation
+* alternative way of making it work: set value of to the hndler function?
 * whats the type of turtle.suck? what happens when it's printed?
 * All toetle specific stuff should be in turtle.toetle where both turtle and toetle are tables. Other than the toetle subtable the turtle table should have the same keys/indexes as the vanilla turtle API.
 * Functions in the turtle API returns an entry from their responce list.

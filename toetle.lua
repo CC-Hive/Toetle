@@ -106,7 +106,7 @@ setmetatable(turtle, turtleMeta)
 setmetatable(turtle.toetle, toetleMeta)
 function turtleMeta.__index(t,k,...) -- when users call a turtle function we'll need to find it, arguments are then passed 'magically'
   if (not states.k) then
-    error("Toetle: this functon is not initualised")
+    error("Toetle: this function is not initualised")
   else
     if type(states.k) ~= "function" then
       error("Toetle: state must be a function",2)
@@ -114,7 +114,7 @@ function turtleMeta.__index(t,k,...) -- when users call a turtle function we'll 
       return state.k -- found the function
     end
   end
-  error("Toetle: this thing that should never happen in turtleMeta.__index has happened.") -- this should never happen, but if it does...
+  error("Toetle: the thing that should never happen in turtleMeta.__index has happened.") -- this should never happen, but if it does...
 end
 
 
