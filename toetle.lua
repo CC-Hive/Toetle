@@ -1,9 +1,9 @@
-if turtle then return end -- we're not needed so we'll just exit
+if turtle then return end -- We're not needed so we'll just exit
 
-_G.turtle = {} -- create dummy API
+_G.turtle = {} -- Create dummy API
 local turtle = _G.turtle
-turtle.toetle = {} -- insert our subAPI which will make the other one work
-turtle.toetle.lists = {} -- where we store our responces
+turtle.toetle = {} -- Insert our subAPI which will make the other one work
+turtle.toetle.lists = {} -- Where we store our responces
 turtle.toetle.indexes = {}
 turtle.toetle.states = {}
 turtle.toetle.nativeStates = {}
@@ -25,7 +25,7 @@ nativeStates.loop = loopHandler
 nativeStates.random = randomHandler
 nativeStates.interactive = interactiveHandler
 
--- fill list of turtle functions
+-- Fill list of turtle functions
 do
 knownTurtleFunctions.craft = true
 knownTurtleFunctions.forward = true
@@ -73,10 +73,10 @@ end
 
 
 
--- generic handler functions for responce types
+-- Generic handler functions for responce types
 
 function loopHandler()
-  -- return the next responce from the list
+  -- Return the next responce from the list
   local r = lists.TEMPLATE[indexes.TEMPLATE]
   indexes.TEMPLATE = indexes.TEMPLATE + 1
   if lists.TEMPLATE[indexes.TEMPLATE] == nil then
@@ -84,17 +84,15 @@ function loopHandler()
   end
   return unpack(r)
 end
+
 function randomHandler()
-  -- return a random responce from the list
+  -- Return a random responce from the list
   return unpack(list.TEMPLATE[math.random(#list.TEMPLATE)])
 end
+
 function interactiveHandler()
-  -- prompt user for input
-  -- TODO
+  -- Prompt user for input
 end
-
--- can I do this with meta tables?
-
 
 -- add turtle functions
 -- TODO - template mostly done
@@ -104,9 +102,9 @@ local turtleMeta = {}
 local toetleMeta = {}
 setmetatable(turtle, turtleMeta)
 setmetatable(turtle.toetle, toetleMeta)
-function turtleMeta.__index(t,k,...) -- when users call a turtle function we'll need to find it, arguments are then passed 'magically'
+function turtleMeta.__index(t,k,...) -- When users call a turtle function we'll need to find it, arguments are then passed 'magically'
   if (not states.k) then
-    error("Toetle: this function is not initualised")
+    error("Toetle: this function is not initialised")
   else
     if type(states.k) ~= "function" then
       error("Toetle: state must be a function",2)
@@ -114,13 +112,13 @@ function turtleMeta.__index(t,k,...) -- when users call a turtle function we'll 
       return state.k -- found the function
     end
   end
-  error("Toetle: the thing that should never happen in turtleMeta.__index has happened.") -- this should never happen, but if it does...
+  error("Toetle: the thing that should never happen in turtleMeta.__index has happened.") -- This should never happen, but if it does...
 end
 
 
-function toetleMeta.__index(t,k) -- initualise turtle functions
+function toetleMeta.__index(t,k) -- Initialise turtle functions
   return function(...)
-    -- look up in known turtle functions
+    -- Look up in known turtle functions
     local args = {...}
     if not knownTurtleFunctions[k] then
       error("Toetle: not a known turtle function, check your spelling. If it's a new function then you can add it to the list (turtle.toetle.knownTurtleFunctions."..k.." = true) and Toetle will do the rest.",2)
@@ -138,7 +136,7 @@ function toetleMeta.__index(t,k) -- initualise turtle functions
         -- user wants nil
         lists.k[indexes.k] = {}
       else
-        -- user has given data which needs to be added to the list of responces
+        -- User has given data which needs to be added to the list of responces
         lists.k[indexes.k] = args
       end
     end
@@ -149,4 +147,4 @@ end
 
 
 
-return turtle -- just in case people want to load us this way
+return turtle -- Just in case people want to load us this way
